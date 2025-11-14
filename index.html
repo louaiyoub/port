@@ -1,0 +1,1076 @@
+<!doctype html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Louai — Portfolio</title>
+  <style>
+    /* ---------- Reset & utilities ---------- */
+    :root{
+      --bg:#0a0a0f;
+      --accent:#06b6d4;
+      --accent-hover:#0891b2;
+      --muted:#9ca3af;
+      --card:#ffffff;
+      --maxw:1200px;
+      --radius:16px;
+      --shadow-sm:0 2px 8px rgba(0,0,0,0.04);
+      --shadow-md:0 8px 24px rgba(0,0,0,0.08);
+      --shadow-lg:0 16px 48px rgba(0,0,0,0.12);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    html,body{height:100%;font-family:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;}
+    body{background:#f8fafc;color:#1e293b}
+    a{color:inherit;text-decoration:none;transition:color 0.2s}
+    a:hover{color:var(--accent)}
+    img{max-width:100%;display:block}
+
+    /* ---------- Animations ---------- */
+    @keyframes fadeInUp{
+      from{opacity:0;transform:translateY(30px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+    @keyframes pulse{
+      0%,100%{box-shadow:0 0 0 0 rgba(6,182,212,0.4)}
+      50%{box-shadow:0 0 0 20px rgba(6,182,212,0)}
+    }
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-12px)}
+    }
+    @keyframes gradient{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    /* ---------- Intro / Splash ---------- */
+    .intro{
+      min-height:100vh;
+      background:linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      text-align:center;
+      flex-direction:column;
+      gap:28px;
+      position:relative;
+      overflow:hidden;
+    }
+    .intro::before{
+      content:'';
+      position:absolute;
+      width:500px;
+      height:500px;
+      background:radial-gradient(circle, rgba(6,182,212,0.15) 0%, transparent 70%);
+      border-radius:50%;
+      animation:float 6s ease-in-out infinite;
+    }
+    .laptop-icon{
+      width:100px;
+      height:100px;
+      border-radius:20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(6,182,212,0.1);
+      border:3px solid var(--accent);
+      box-shadow:0 8px 32px rgba(6,182,212,0.3);
+      animation:pulse 2s infinite;
+      position:relative;
+      z-index:1;
+    }
+    .intro h1{
+      font-size:48px;
+      font-weight:800;
+      background:linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+      position:relative;
+      z-index:1;
+    }
+    .intro p{
+      color:#cbd5e1;
+      font-size:18px;
+      max-width:600px;
+      line-height:1.6;
+      position:relative;
+      z-index:1;
+    }
+    .btn-intro{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      padding:16px 32px;
+      border-radius:12px;
+      background:var(--accent);
+      color:#fff;
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+      font-size:16px;
+      transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow:0 4px 16px rgba(6,182,212,0.4);
+      position:relative;
+      z-index:1;
+    }
+    .btn-intro:hover{
+      background:var(--accent-hover);
+      transform:translateY(-4px);
+      box-shadow:0 8px 24px rgba(6,182,212,0.5);
+    }
+
+    /* ---------- Header ---------- */
+    header{
+      position:sticky;
+      top:0;
+      background:rgba(255,255,255,0.85);
+      backdrop-filter:blur(12px);
+      z-index:100;
+      border-bottom:1px solid rgba(0,0,0,0.08);
+      transition:all 0.3s;
+    }
+    header.scrolled{
+      box-shadow:var(--shadow-sm);
+      background:rgba(255,255,255,0.95);
+    }
+    .container{max-width:var(--maxw);margin:0 auto;padding:20px 24px}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{
+      font-weight:800;
+      font-size:24px;
+      background:linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    nav .links{display:flex;gap:8px;flex-wrap:wrap}
+    .pill{
+      padding:10px 18px;
+      border-radius:10px;
+      border:none;
+      background:transparent;
+      cursor:pointer;
+      font-weight:600;
+      font-size:15px;
+      color:#64748b;
+      transition:all 0.2s;
+    }
+    .pill:hover{background:#f1f5f9;color:#1e293b}
+    .pill.active{
+      background:linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      color:#fff;
+      box-shadow:0 4px 12px rgba(6,182,212,0.3);
+    }
+
+    main{background:#f8fafc;min-height:calc(100vh - 80px)}
+
+    /* ---------- Hero ---------- */
+    .hero{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:48px;
+      padding:80px 24px;
+      align-items:center;
+      animation:fadeInUp 0.8s ease-out;
+    }
+    .hero .left{max-width:640px}
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 16px;
+      background:linear-gradient(135deg, rgba(6,182,212,0.1) 0%, rgba(59,130,246,0.1) 100%);
+      border:1px solid rgba(6,182,212,0.3);
+      border-radius:999px;
+      color:var(--accent);
+      font-size:14px;
+      font-weight:600;
+      margin-bottom:24px;
+    }
+    .badge-dot{
+      width:8px;
+      height:8px;
+      background:var(--accent);
+      border-radius:50%;
+      animation:pulse 2s infinite;
+    }
+    .big-title{
+      font-size:56px;
+      font-weight:900;
+      line-height:1.1;
+      margin:16px 0;
+      background:linear-gradient(135deg, #0f172a 0%, #475569 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .desc{
+      font-size:20px;
+      color:#64748b;
+      line-height:1.7;
+      margin-bottom:32px;
+    }
+    .hero .actions{display:flex;gap:16px;margin-bottom:32px;flex-wrap:wrap}
+    .cta{
+      padding:14px 28px;
+      border-radius:12px;
+      border:2px solid transparent;
+      cursor:pointer;
+      font-weight:700;
+      font-size:16px;
+      transition:all 0.3s;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .cta.primary{
+      background:linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      color:#fff;
+      box-shadow:0 4px 16px rgba(6,182,212,0.3);
+    }
+    .cta.primary:hover{
+      transform:translateY(-3px);
+      box-shadow:0 8px 24px rgba(6,182,212,0.4);
+    }
+    .cta.secondary{
+      background:#fff;
+      border-color:#e2e8f0;
+      color:#1e293b;
+    }
+    .cta.secondary:hover{
+      border-color:var(--accent);
+      background:#f8fafc;
+    }
+    .social-links{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .social-links span{color:#94a3b8;font-size:14px;font-weight:600}
+    .social-icon{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:40px;
+      height:40px;
+      border-radius:10px;
+      background:#fff;
+      border:1px solid #e2e8f0;
+      transition:all 0.3s;
+    }
+    .social-icon:hover{
+      background:var(--accent);
+      border-color:var(--accent);
+      color:#fff;
+      transform:translateY(-3px);
+    }
+
+    .avatar-wrap{display:flex;justify-content:center}
+    .avatar{
+      width:280px;
+      height:280px;
+      border-radius:24px;
+      overflow:hidden;
+      position:relative;
+      background:linear-gradient(135deg, #fff 0%, #f1f5f9 100%);
+      box-shadow:var(--shadow-lg);
+      border:4px solid #fff;
+    }
+    .avatar::before{
+      content:'';
+      position:absolute;
+      top:-50%;
+      left:-50%;
+      width:200%;
+      height:200%;
+      background:linear-gradient(45deg, transparent 30%, rgba(6,182,212,0.1) 50%, transparent 70%);
+      animation:gradient 3s linear infinite;
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover}
+
+    /* ---------- Sections ---------- */
+    section{padding:80px 24px}
+    .section-title{
+      font-size:42px;
+      font-weight:800;
+      margin-bottom:16px;
+      background:linear-gradient(135deg, #0f172a 0%, #475569 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .section-subtitle{
+      font-size:18px;
+      color:#64748b;
+      max-width:720px;
+      line-height:1.7;
+      margin-bottom:48px;
+    }
+
+    /* ---------- Skills Grid ---------- */
+    .skills-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+      gap:16px;
+      margin-top:32px;
+    }
+    .skill-item{
+      background:#fff;
+      padding:24px;
+      border-radius:16px;
+      text-align:center;
+      border:1px solid #e2e8f0;
+      transition:all 0.3s;
+    }
+    .skill-item:hover{
+      border-color:var(--accent);
+      box-shadow:0 8px 24px rgba(6,182,212,0.15);
+      transform:translateY(-4px);
+    }
+    .skill-icon{
+      font-size:32px;
+      margin-bottom:12px;
+    }
+    .skill-name{
+      font-weight:700;
+      font-size:14px;
+      color:#1e293b;
+    }
+
+    /* ---------- Projects ---------- */
+    .grid-projects{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
+      gap:24px;
+      margin-top:32px;
+    }
+    .project-card{
+      background:#fff;
+      border-radius:20px;
+      overflow:hidden;
+      border:1px solid #e2e8f0;
+      transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position:relative;
+    }
+    .project-card:hover{
+      transform:translateY(-8px);
+      box-shadow:var(--shadow-lg);
+      border-color:var(--accent);
+    }
+    .project-image{
+      width:100%;
+      height:200px;
+      background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:48px;
+      color:#fff;
+      position:relative;
+      overflow:hidden;
+    }
+    .project-card:nth-child(2) .project-image{
+      background:linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+    .project-card:nth-child(3) .project-image{
+      background:linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+    .project-content{padding:24px}
+    .project-meta{
+      font-size:13px;
+      color:var(--accent);
+      font-weight:600;
+      text-transform:uppercase;
+      letter-spacing:0.5px;
+      margin-bottom:8px;
+    }
+    .project-title{
+      font-size:22px;
+      font-weight:800;
+      margin-bottom:12px;
+      color:#1e293b;
+    }
+    .project-desc{
+      color:#64748b;
+      line-height:1.6;
+      margin-bottom:20px;
+      font-size:15px;
+    }
+    .project-tags{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:20px;
+    }
+    .tag{
+      padding:6px 12px;
+      background:#f1f5f9;
+      border-radius:6px;
+      font-size:12px;
+      font-weight:600;
+      color:#475569;
+    }
+    .project-links{
+      display:flex;
+      gap:12px;
+    }
+    .project-btn{
+      flex:1;
+      padding:10px;
+      border-radius:10px;
+      text-align:center;
+      font-weight:600;
+      font-size:14px;
+      border:2px solid #e2e8f0;
+      background:#fff;
+      transition:all 0.3s;
+    }
+    .project-btn:hover{
+      border-color:var(--accent);
+      background:var(--accent);
+      color:#fff;
+    }
+
+    /* ---------- Services ---------- */
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+      gap:24px;
+      margin-top:32px;
+    }
+    .service-card{
+      background:#fff;
+      padding:32px;
+      border-radius:20px;
+      border:1px solid #e2e8f0;
+      transition:all 0.3s;
+      position:relative;
+      overflow:hidden;
+    }
+    .service-card::before{
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:4px;
+      background:linear-gradient(90deg, var(--accent), #3b82f6);
+      transform:scaleX(0);
+      transition:transform 0.3s;
+    }
+    .service-card:hover::before{
+      transform:scaleX(1);
+    }
+    .service-card:hover{
+      transform:translateY(-6px);
+      box-shadow:var(--shadow-md);
+    }
+    .service-icon{
+      width:56px;
+      height:56px;
+      border-radius:14px;
+      background:linear-gradient(135deg, rgba(6,182,212,0.1) 0%, rgba(59,130,246,0.1) 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:28px;
+      margin-bottom:20px;
+    }
+    .service-title{
+      font-size:20px;
+      font-weight:800;
+      margin-bottom:12px;
+      color:#1e293b;
+    }
+    .service-desc{
+      color:#64748b;
+      line-height:1.6;
+      font-size:15px;
+    }
+
+    /* ---------- Contact ---------- */
+    .contact-grid{
+      display:grid;
+      grid-template-columns:1fr 1.5fr;
+      gap:48px;
+      align-items:start;
+      margin-top:32px;
+    }
+    .contact-info{
+      background:#fff;
+      padding:40px;
+      border-radius:20px;
+      border:1px solid #e2e8f0;
+    }
+    .contact-item{
+      display:flex;
+      gap:16px;
+      margin-bottom:24px;
+      align-items:flex-start;
+    }
+    .contact-icon{
+      width:48px;
+      height:48px;
+      border-radius:12px;
+      background:linear-gradient(135deg, rgba(6,182,212,0.1) 0%, rgba(59,130,246,0.1) 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+    }
+    .contact-text{flex:1}
+    .contact-label{
+      font-size:13px;
+      color:#94a3b8;
+      font-weight:600;
+      text-transform:uppercase;
+      letter-spacing:0.5px;
+      margin-bottom:4px;
+    }
+    .contact-value{
+      font-size:16px;
+      font-weight:700;
+      color:#1e293b;
+    }
+
+    .contact-form{
+      background:#fff;
+      padding:40px;
+      border-radius:20px;
+      border:1px solid #e2e8f0;
+    }
+    .form-group{margin-bottom:20px}
+    .form-label{
+      display:block;
+      font-weight:600;
+      color:#1e293b;
+      margin-bottom:8px;
+      font-size:14px;
+    }
+    .input, textarea{
+      width:100%;
+      padding:14px 16px;
+      border-radius:12px;
+      border:2px solid #e2e8f0;
+      font-size:15px;
+      transition:all 0.3s;
+      font-family:inherit;
+    }
+    .input:focus, textarea:focus{
+      outline:none;
+      border-color:var(--accent);
+      box-shadow:0 0 0 4px rgba(6,182,212,0.1);
+    }
+    textarea{resize:vertical;min-height:140px}
+    .btn-send{
+      width:100%;
+      padding:16px;
+      border-radius:12px;
+      background:linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      color:#fff;
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+      font-size:16px;
+      transition:all 0.3s;
+      box-shadow:0 4px 16px rgba(6,182,212,0.3);
+    }
+    .btn-send:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 24px rgba(6,182,212,0.4);
+    }
+
+    /* ---------- Footer ---------- */
+    footer{
+      background:linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+      color:#fff;
+      padding:48px 24px 24px;
+      text-align:center;
+    }
+    .footer-content{
+      max-width:var(--maxw);
+      margin:0 auto;
+    }
+    .footer-socials{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      margin-bottom:24px;
+    }
+    .footer-social{
+      width:44px;
+      height:44px;
+      border-radius:12px;
+      background:rgba(255,255,255,0.1);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:all 0.3s;
+    }
+    .footer-social:hover{
+      background:var(--accent);
+      transform:translateY(-3px);
+    }
+    .footer-text{
+      color:#94a3b8;
+      font-size:14px;
+    }
+
+    /* ---------- Floating Action Button ---------- */
+    .fab{
+      position:fixed;
+      right:24px;
+      bottom:24px;
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      background:linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      box-shadow:0 8px 24px rgba(6,182,212,0.4);
+      cursor:pointer;
+      transition:all 0.3s;
+      z-index:99;
+      font-size:20px;
+    }
+    .fab:hover{
+      transform:translateY(-4px);
+      box-shadow:0 12px 32px rgba(6,182,212,0.5);
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (min-width:900px){
+      .hero{grid-template-columns:1fr 1fr;padding:100px 24px}
+    }
+    @media (max-width:900px){
+      .contact-grid{grid-template-columns:1fr}
+      .big-title{font-size:42px}
+      .intro h1{font-size:36px}
+    }
+    @media (max-width:600px){
+      .big-title{font-size:32px}
+      .section-title{font-size:32px}
+      .avatar{width:220px;height:220px}
+      .grid-projects{grid-template-columns:1fr}
+      .hero .actions{flex-direction:column;width:100%}
+      .cta{width:100%;justify-content:center}
+      nav .links{gap:4px}
+      .pill{padding:8px 14px;font-size:14px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Intro / Splash -->
+  <div id="intro" class="intro" aria-hidden="false">
+    <div class="laptop-icon" role="img" aria-label="laptop icon">
+      <svg width="54" height="54" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="4.5" width="18" height="10" rx="1.3" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M2 17h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <h1>Welcome to My Portfolio</h1>
+    <p>Crafting beautiful digital experiences with modern web technologies. Let's build something amazing together.</p>
+
+    <button id="enterBtn" class="btn-intro" aria-label="Enter my profile">
+      <span>EXPLORE MY WORK</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Page content -->
+  <div id="site" style="display:none">
+    <!-- Header / Navbar -->
+    <header id="header">
+      <div class="container nav" role="navigation" aria-label="Main navigation">
+        <div class="brand">Louai</div>
+        <nav class="links" aria-label="Sections">
+          <button class="pill active" data-target="home">Home</button>
+          <button class="pill" data-target="about">About</button>
+          <button class="pill" data-target="projects">Projects</button>
+          <button class="pill" data-target="services">Services</button>
+          <button class="pill" data-target="contact">Contact</button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Home -->
+      <section id="home" class="hero" tabindex="-1">
+        <div class="left">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span>Available for freelance work</span>
+          </div>
+          <h1 class="big-title">Hi, I'm louai youb 👋</h1>
+          <div class="desc">A passionate web developer creating beautiful, functional and user-centered digital experiences with modern technologies.</div>
+          
+          <div class="actions">
+            <a class="cta primary" href="#contact">
+              Let's Talk
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            
+          </div>
+
+          <div class="social-links">
+            <span>Follow me:</span>
+            <a href="https://x.com/LouaiYoub1411" class="footer-social" aria-label="Twitter">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 001.88-2.37 8.59 8.59 0 01-2.72 1.04 4.28 4.28 0 00-7.3 3.9A12.14 12.14 0 013 4.89a4.28 4.28 0 001.32 5.72 4.24 4.24 0 01-1.94-.54v.05a4.28 4.28 0 003.44 4.2 4.3 4.3 0 01-1.93.07 4.28 4.28 0 004 2.97A8.6 8.6 0 012 19.54a12.14 12.14 0 006.56 1.92c7.88 0 12.2-6.53 12.2-12.2l-.01-.56A8.72 8.72 0 0022.46 6z"/>
+            </svg>
+          </a>
+          <a href="https://github.com/louaiyoub" class="footer-social" aria-label="github">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/louai-youb-a77885371/" class="footer-social" aria-label="linkedin">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/ly10.80/" class="footer-social" aria-label="instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2m-.2 2A3.6 3.6 0 004 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 003.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 011.25 1.25A1.25 1.25 0 0117.25 8 1.25 1.25 0 0116 6.75a1.25 1.25 0 011.25-1.25M12 7a5 5 0 015 5 5 5 0 01-5 5 5 5 0 01-5-5 5 5 0 015-5m0 2a3 3 0 00-3 3 3 3 0 003 3 3 3 0 003-3 3 3 0 00-3-3z"/>
+            </svg>
+          </a>
+          </div>
+        </div>
+
+        <div class="avatar-wrap">
+          <div class="avatar">
+            <img src="./4604f961-ba6d-43f6-8984-d97f03b41dcc (1).png" alt="Amine avatar" width="280" height="280">
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" aria-labelledby="aboutTitle">
+        <div class="container" style="max-width:var(--maxw);margin:auto">
+          <h2 id="aboutTitle" class="section-title">About Me</h2>
+          <p class="section-subtitle">I'm a passionate web developer with 2+ years of experience building modern, responsive websites and web applications. I specialize in creating clean, efficient code and pixel-perfect user interfaces that deliver exceptional user experiences.</p>
+          
+          <div class="skills-grid">
+            <div class="skill-item">
+              <div class="skill-icon">💻</div>
+              <div class="skill-name">Web Development</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon">🎨</div>
+              <div class="skill-name">UI/UX Design</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon">⚡</div>
+              <div class="skill-name">Performance</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon">📱</div>
+              <div class="skill-name">Responsive</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon">🚀</div>
+              <div class="skill-name">React & Vue</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon">🔧</div>
+              <div class="skill-name">Node.js</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" aria-labelledby="projectsTitle">
+        <div class="container" style="max-width:var(--maxw);margin:auto">
+          <h2 id="projectsTitle" class="section-title">Featured Projects</h2>
+          <p class="section-subtitle">A collection of my recent work showcasing various skills and technologies.</p>
+
+          <div class="grid-projects">
+            <article class="project-card" aria-labelledby="p1">
+              <div class="project-image">📝</div>
+              <div class="project-content">
+                <div class="project-meta">Web • Landing</div>
+                <h3 id="p1" class="project-title">Blog Website</h3>
+                <p class="project-desc">A modern blog platform with markdown support, syntax highlighting, and fully responsive design for optimal reading experience.</p>
+                <div class="project-tags">
+                  <span class="tag">React</span>
+                  <span class="tag">Markdown</span>
+                  <span class="tag">CSS</span>
+                </div>
+                <div class="project-links">
+                  <a class="project-btn" href="#" target="_blank">View Code</a>
+                  <a class="project-btn" href="#" target="_blank">Live Demo</a>
+                </div>
+              </div>
+            </article>
+
+            
+            
+          </div>
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section id="services" aria-labelledby="servicesTitle">
+        <div class="container" style="max-width:var(--maxw);margin:auto">
+          <h2 id="servicesTitle" class="section-title">Services & Expertise</h2>
+          <p class="section-subtitle">Comprehensive web solutions tailored to your needs.</p>
+          
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon">🌐</div>
+              <div class="service-title">Web Development</div>
+              <div class="service-desc">Building modern, responsive websites with clean code and best practices. From landing pages to complex web applications.</div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">📱</div>
+              <div class="service-title">App Development</div>
+              <div class="service-desc">Creating mobile-first web applications and Progressive Web Apps that work seamlessly across all devices.</div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">🎯</div>
+              <div class="service-title">Digital Marketing</div>
+              <div class="service-desc">SEO optimization and content strategies to improve your online visibility and reach your target audience.</div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">✉️</div>
+              <div class="service-title">Email Marketing</div>
+              <div class="service-desc">Professional email campaign setup and automation to engage customers and drive conversions.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" aria-labelledby="contactTitle">
+        <div class="container" style="max-width:var(--maxw);margin:auto">
+          <h2 id="contactTitle" class="section-title">Get In Touch</h2>
+          <p class="section-subtitle">Have a project in mind? Let's work together to bring your ideas to life.</p>
+
+          <div class="contact-grid">
+            <div class="contact-info">
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="contact-text">
+                  <div class="contact-label">Email</div>
+                  <div class="contact-value">youblouai@gmail.com</div>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="contact-text">
+                  <div class="contact-label">Phone</div>
+                  <div class="contact-value">+213 552 56 70 96</div>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="contact-text">
+                  <div class="contact-label">Location</div>
+                  <div class="contact-value">bouzereah,Algiers, Algeria</div>
+                </div>
+              </div>
+
+              <div style="margin-top:32px">
+                <div class="contact-label" style="margin-bottom:12px">Social Links</div>
+                <div class="social-links">
+                  <a href="#" class="social-icon" aria-label="github">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+                    </svg>
+                  </a>
+                  <a href="#" class="social-icon" aria-label="linkedin">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-form">
+              <form id="contactForm" onsubmit="return false;">
+                <div class="form-group">
+                  <label class="form-label" for="nameField">Name</label>
+                  <input class="input" id="nameField" type="text" placeholder="Your name" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="emailField">Email</label>
+                  <input class="input" id="emailField" type="email" placeholder="your@email.com" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="msgField">Message</label>
+                  <textarea id="msgField" class="input" placeholder="Tell me about your project..." required></textarea>
+                </div>
+                <button class="btn-send" id="sendBtn">
+                  Send Message
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="display:inline-block;vertical-align:middle;margin-left:8px">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-socials">
+          <a href="https://x.com/LouaiYoub1411" class="footer-social" aria-label="Twitter">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 001.88-2.37 8.59 8.59 0 01-2.72 1.04 4.28 4.28 0 00-7.3 3.9A12.14 12.14 0 013 4.89a4.28 4.28 0 001.32 5.72 4.24 4.24 0 01-1.94-.54v.05a4.28 4.28 0 003.44 4.2 4.3 4.3 0 01-1.93.07 4.28 4.28 0 004 2.97A8.6 8.6 0 012 19.54a12.14 12.14 0 006.56 1.92c7.88 0 12.2-6.53 12.2-12.2l-.01-.56A8.72 8.72 0 0022.46 6z"/>
+            </svg>
+          </a>
+          <a href="https://github.com/louaiyoub" class="footer-social" aria-label="github">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/louai-youb-a77885371/" class="footer-social" aria-label="linkedin">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/ly10.80/" class="footer-social" aria-label="instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2m-.2 2A3.6 3.6 0 004 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 003.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 011.25 1.25A1.25 1.25 0 0117.25 8 1.25 1.25 0 0116 6.75a1.25 1.25 0 011.25-1.25M12 7a5 5 0 015 5 5 5 0 01-5 5 5 5 0 01-5-5 5 5 0 015-5m0 2a3 3 0 00-3 3 3 3 0 003 3 3 3 0 003-3 3 3 0 00-3-3z"/>
+            </svg>
+          </a>
+        </div>
+        <div class="footer-text">© <span id="year"></span> Amine. All rights reserved. Built with passion & code.</div>
+      </div>
+    </footer>
+
+    <div class="fab" title="Back to top" id="toTop" aria-label="Scroll to top">↑</div>
+  </div>
+
+  <script>
+    // DOM refs
+    const intro = document.getElementById('intro');
+    const site = document.getElementById('site');
+    const enterBtn = document.getElementById('enterBtn');
+    const header = document.getElementById('header');
+    const pills = Array.from(document.querySelectorAll('nav .pill'));
+    const sections = ['home','about','projects','services','contact'];
+    const toTop = document.getElementById('toTop');
+    const yearEl = document.getElementById('year');
+
+    yearEl.textContent = new Date().getFullYear();
+
+    // Intro enter
+    enterBtn.addEventListener('click', () => {
+      intro.style.display = 'none';
+      site.style.display = '';
+      document.getElementById('home').scrollIntoView({behavior:'smooth'});
+      if(!location.hash) location.hash = '#/home';
+    });
+
+    // Skip intro if hash exists
+    if(location.hash) {
+      intro.style.display = 'none';
+      site.style.display = '';
+    }
+
+    // Navigation
+    function setActive(target) {
+      pills.forEach(p => {
+        if(p.dataset.target === target) p.classList.add('active');
+        else p.classList.remove('active');
+      });
+      const el = document.getElementById(target);
+      if(el) el.scrollIntoView({behavior:'smooth'});
+    }
+
+    pills.forEach(p => {
+      p.addEventListener('click', () => {
+        const t = p.dataset.target;
+        location.hash = '#/' + t;
+        setActive(t);
+      });
+    });
+
+    // Handle hashchange
+    window.addEventListener('hashchange', () => {
+      const key = location.hash.replace('#/','') || 'home';
+      if(sections.includes(key)) setActive(key);
+    });
+
+    // Init
+    window.addEventListener('load', () => {
+      const key = location.hash.replace('#/','') || 'home';
+      if(sections.includes(key)) setActive(key);
+    });
+
+    // Scroll effects
+    window.addEventListener('scroll', () => {
+      // Header shadow on scroll
+      if(window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      
+      // Show/hide FAB
+      if(window.scrollY > 300) {
+        toTop.style.display = 'flex';
+      } else {
+        toTop.style.display = 'none';
+      }
+    });
+
+    // Contact form
+    document.getElementById('sendBtn').addEventListener('click', () => {
+      const name = document.getElementById('nameField').value.trim();
+      const mail = document.getElementById('emailField').value.trim();
+      const msg = document.getElementById('msgField').value.trim();
+      
+      if(!name || !mail || !msg) {
+        alert('Please fill in all fields');
+        return;
+      }
+      
+      const subject = encodeURIComponent('Portfolio Contact from ' + name);
+      const body = encodeURIComponent(msg + '\n\nFrom: ' + name + '\nEmail: ' + mail);
+      window.location.href = `mailto:amine@example.com?subject=${subject}&body=${body}`;
+    });
+
+    // Back to top
+    toTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+    // Keyboard accessibility
+    enterBtn.addEventListener('keyup', (e) => {
+      if(e.key === 'Enter') enterBtn.click();
+    });
+  </script>
+</body>
+</html>
